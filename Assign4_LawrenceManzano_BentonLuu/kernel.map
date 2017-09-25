@@ -1,0 +1,411 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD build/blockcollisions.o
+LOAD build/main.o
+LOAD build/winANDlose.o
+LOAD build/drawMario.o
+LOAD build/numbers.o
+LOAD build/pauseScreen.o
+LOAD build/jtag.o
+LOAD build/framebuffer.o
+LOAD build/Coin.o
+LOAD build/levelTwo.o
+LOAD build/interrupt.o
+LOAD build/pauseControlANDrestart.o
+LOAD build/startScreen.o
+LOAD build/drawMushroom.o
+LOAD build/controller.o
+LOAD build/introControl.o
+LOAD build/dropANDpipecollisions.o
+LOAD build/levelFinal.o
+LOAD build/mushroomSelector.o
+LOAD build/levelThree.o
+LOAD build/monster.o
+LOAD build/levelOne.o
+
+.init           0x00008000        0x4
+ *(.init)
+ .init          0x00008000        0x4 build/main.o
+                0x00008000                _start
+
+.data           0x00009080   0x205f74
+ *(.data)
+ .data          0x00009080        0xc build/blockcollisions.o
+ .data          0x0000908c      0x114 build/main.o
+                0x0000908c                gamemode
+                0x00009090                worldCounter
+                0x00009094                marioX
+                0x0000909c                marioY
+                0x000090a4                marioPECE
+                0x000090b4                marioRight
+                0x000090b8                moveCounter
+                0x000090bc                marioPECEjump
+                0x000090c4                midjump
+                0x000090c8                arcRight
+                0x000090cc                arcLeft
+                0x000090d0                arcCounter
+                0x000090d4                arcX
+                0x000090d8                changeCurve
+                0x00009158                gravityCounter
+                0x0000915c                arcBool
+                0x00009160                movedClimax
+                0x00009164                marioOnPipe
+                0x00009168                pauseBool
+                0x0000916c                onBoxes
+                0x0000917c                coinJustHit
+                0x00009188                mysteryBox
+                0x00009194                hitBrick
+ .data          0x000091a0    0x36c90 build/winANDlose.o
+ .data          0x0003fe30     0x8000 build/drawMario.o
+ .data          0x00047e30     0x500c build/numbers.o
+                0x0004ce30                coinCount
+                0x0004ce34                scoreCount
+                0x0004ce38                marioLives
+ .data          0x0004ce3c    0x24800 build/pauseScreen.o
+ .data          0x0007163c        0x0 build/jtag.o
+ *fill*         0x0007163c        0x4 3f3f3f3f
+ .data          0x00071640       0x70 build/framebuffer.o
+                0x000716a0                FrameBufferPointer
+ .data          0x000716b0     0x2000 build/Coin.o
+ .data          0x000736b0     0x600c build/levelTwo.o
+ .data          0x000796bc       0x5c build/interrupt.o
+                0x000796fc                w
+                0x0007970c                mushroom_xPos
+                0x00079714                mushroomOnScreen
+ .data          0x00079718       0x1c build/pauseControlANDrestart.o
+                0x00079718                pauseSel
+ .data          0x00079734   0x160014 build/startScreen.o
+ .data          0x001d9748      0xdc8 build/drawMushroom.o
+ .data          0x001da510        0x0 build/controller.o
+ .data          0x001da510        0x4 build/introControl.o
+                0x001da510                selector
+ .data          0x001da514       0x1c build/dropANDpipecollisions.o
+                0x001da52c                dropBool
+ .data          0x001da530    0x20000 build/levelFinal.o
+ .data          0x001fa530     0x2800 build/mushroomSelector.o
+ .data          0x001fcd30     0xc020 build/levelThree.o
+ .data          0x00208d50     0x228c build/monster.o
+                0x00208d50                killedGoomba
+                0x00208d54                hitGoomba
+                0x00208d58                hitSpiky
+ .data          0x0020afdc     0x4018 build/levelOne.o
+                0x0020aff4                brick
+                0x0020cff4                blue
+ *.c.o(*)
+
+.igot.plt       0x0020eff4        0x0
+ .igot.plt      0x00000000        0x0 build/blockcollisions.o
+
+.text           0x0020eff4     0x4514
+ *.c.o(.text)
+ *(.text)
+ .text          0x0020eff4      0x1a4 build/blockcollisions.o
+                0x0020eff4                dropBlockR
+                0x0020f0bc                dropBlockL
+ .text          0x0020f198     0x2140 build/main.o
+                0x0020f1c8                startGame
+ .text          0x002112d8       0x78 build/winANDlose.o
+                0x002112d8                drawWinScreen
+                0x002112f8                drawLoseScreen
+ .text          0x00211350       0xc0 build/drawMario.o
+                0x00211350                drawMarioR
+                0x00211370                drawMarioJumpR
+                0x00211390                drawMarioL
+                0x002113b0                drawMarioJumpL
+ .text          0x00211410      0x434 build/numbers.o
+                0x00211410                startNumbers
+                0x00211470                decreaseLives
+                0x002114e8                printProperNumber
+                0x00211590                updateLives
+                0x002115c4                updateCoins
+                0x00211624                updateScore
+                0x00211698                zero
+                0x002116b8                one
+                0x002116d8                two
+                0x002116f8                three
+                0x00211718                four
+                0x00211738                five
+                0x00211758                six
+                0x00211778                seven
+                0x00211798                eight
+                0x002117b8                nine
+ .text          0x00211844       0x78 build/pauseScreen.o
+                0x00211844                pauseScreen
+                0x00211864                clearPause
+ .text          0x002118bc       0x8c build/jtag.o
+                0x002118bc                EnableJTAG
+ .text          0x00211948       0x80 build/framebuffer.o
+                0x00211948                InitFrameBuffer
+ .text          0x002119c8       0xf8 build/Coin.o
+                0x002119c8                checkCoinHits
+                0x00211a68                drawCoin
+ .text          0x00211ac0      0x27c build/levelTwo.o
+                0x00211ac0                levelTwo
+                0x00211c08                clearLevelTwo
+                0x00211ccc                mysteryHit
+ .text          0x00211d3c      0x2b8 build/interrupt.o
+                0x00211d3c                InstallIntTable
+                0x00211d74                Interrupt
+                0x00211db4                irq
+ .text          0x00211ff4      0x410 build/pauseControlANDrestart.o
+                0x00211ff4                pauseControl
+                0x00212228                restart
+                0x0021227c                restartLeft
+ .text          0x00212404      0x198 build/startScreen.o
+                0x00212404                startScreen
+                0x0021249c                drawBrick
+                0x002124dc                clearScreen
+                0x00212568                DrawPixel
+ .text          0x0021259c      0x110 build/drawMushroom.o
+                0x0021259c                drawLifeMushroom
+                0x002125ec                clearPrevMRPos
+                0x00212618                checkMushroomHit_fall
+ .text          0x002126ac       0xf8 build/controller.o
+                0x002126ac                Init_GPIO
+                0x002126f0                writeLAT
+                0x0021271c                writeCLOCK
+                0x00212748                readDATA
+                0x00212774                Wait
+ .text          0x002127a4       0xe4 build/introControl.o
+                0x002127a4                introControl
+                0x00212860                quitGame
+                0x00212874                haltLoop$
+ .text          0x00212888      0x4ec build/dropANDpipecollisions.o
+                0x00212888                drop
+                0x00212b08                dropPipeR
+                0x00212bdc                dropPipeL
+                0x00212cb0                movePipeFall
+ .text          0x00212d74       0x84 build/levelFinal.o
+                0x00212d74                levelFinal
+ .text          0x00212df8       0x78 build/mushroomSelector.o
+                0x00212df8                mushroomSelector
+                0x00212e18                mushroomPause
+ .text          0x00212e70      0x18c build/levelThree.o
+                0x00212e70                levelThree
+                0x00212eac                clearLevelThreeFinal
+ .text          0x00212ffc      0x364 build/monster.o
+                0x00212ffc                hitMonster
+                0x00213120                jumpMonster
+                0x002132bc                drawGoomba
+                0x002132dc                drawSpiky
+ .text          0x00213360      0x1a8 build/levelOne.o
+                0x00213360                levelOne
+                0x002134a4                drawBlue
+OUTPUT(build/output.elf elf32-littlearm)
+
+.glue_7         0x00213508        0x0
+ .glue_7        0x00000000        0x0 linker stubs
+
+.glue_7t        0x00213508        0x0
+ .glue_7t       0x00000000        0x0 linker stubs
+
+.vfp11_veneer   0x00213508        0x0
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00213508        0x0
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.iplt           0x00213508        0x0
+ .iplt          0x00000000        0x0 build/blockcollisions.o
+
+.rel.dyn        0x00213508        0x0
+ .rel.iplt      0x00000000        0x0 build/blockcollisions.o
+
+.bss            0x00213508        0x0
+ .bss           0x00213508        0x0 build/blockcollisions.o
+ .bss           0x00213508        0x0 build/main.o
+ .bss           0x00213508        0x0 build/winANDlose.o
+ .bss           0x00213508        0x0 build/drawMario.o
+ .bss           0x00213508        0x0 build/numbers.o
+ .bss           0x00213508        0x0 build/pauseScreen.o
+ .bss           0x00213508        0x0 build/jtag.o
+ .bss           0x00213508        0x0 build/framebuffer.o
+ .bss           0x00213508        0x0 build/Coin.o
+ .bss           0x00213508        0x0 build/levelTwo.o
+ .bss           0x00213508        0x0 build/interrupt.o
+ .bss           0x00213508        0x0 build/pauseControlANDrestart.o
+ .bss           0x00213508        0x0 build/startScreen.o
+ .bss           0x00213508        0x0 build/drawMushroom.o
+ .bss           0x00213508        0x0 build/controller.o
+ .bss           0x00213508        0x0 build/introControl.o
+ .bss           0x00213508        0x0 build/dropANDpipecollisions.o
+ .bss           0x00213508        0x0 build/levelFinal.o
+ .bss           0x00213508        0x0 build/mushroomSelector.o
+ .bss           0x00213508        0x0 build/levelThree.o
+ .bss           0x00213508        0x0 build/monster.o
+ .bss           0x00213508        0x0 build/levelOne.o
+
+.ARM.attributes
+                0x00000000       0x29
+ .ARM.attributes
+                0x00000000       0x29 build/blockcollisions.o
+ .ARM.attributes
+                0x00000029       0x29 build/main.o
+ .ARM.attributes
+                0x00000052       0x29 build/winANDlose.o
+ .ARM.attributes
+                0x0000007b       0x29 build/drawMario.o
+ .ARM.attributes
+                0x000000a4       0x29 build/numbers.o
+ .ARM.attributes
+                0x000000cd       0x29 build/pauseScreen.o
+ .ARM.attributes
+                0x000000f6       0x29 build/jtag.o
+ .ARM.attributes
+                0x0000011f       0x29 build/framebuffer.o
+ .ARM.attributes
+                0x00000148       0x29 build/Coin.o
+ .ARM.attributes
+                0x00000171       0x29 build/levelTwo.o
+ .ARM.attributes
+                0x0000019a       0x29 build/interrupt.o
+ .ARM.attributes
+                0x000001c3       0x29 build/pauseControlANDrestart.o
+ .ARM.attributes
+                0x000001ec       0x29 build/startScreen.o
+ .ARM.attributes
+                0x00000215       0x29 build/drawMushroom.o
+ .ARM.attributes
+                0x0000023e       0x29 build/controller.o
+ .ARM.attributes
+                0x00000267       0x29 build/introControl.o
+ .ARM.attributes
+                0x00000290       0x29 build/dropANDpipecollisions.o
+ .ARM.attributes
+                0x000002b9       0x29 build/levelFinal.o
+ .ARM.attributes
+                0x000002e2       0x29 build/mushroomSelector.o
+ .ARM.attributes
+                0x0000030b       0x29 build/levelThree.o
+ .ARM.attributes
+                0x00000334       0x29 build/monster.o
+ .ARM.attributes
+                0x0000035d       0x29 build/levelOne.o
+
+.debug_line     0x00000000     0x186f
+ .debug_line    0x00000000       0xb7 build/blockcollisions.o
+ .debug_line    0x000000b7      0x91f build/main.o
+ .debug_line    0x000009d6       0x62 build/winANDlose.o
+ .debug_line    0x00000a38       0x7e build/drawMario.o
+ .debug_line    0x00000ab6      0x16a build/numbers.o
+ .debug_line    0x00000c20       0x65 build/pauseScreen.o
+ .debug_line    0x00000c85       0x61 build/jtag.o
+ .debug_line    0x00000ce6       0x67 build/framebuffer.o
+ .debug_line    0x00000d4d       0x7d build/Coin.o
+ .debug_line    0x00000dca       0xef build/levelTwo.o
+ .debug_line    0x00000eb9      0x114 build/interrupt.o
+ .debug_line    0x00000fcd      0x165 build/pauseControlANDrestart.o
+ .debug_line    0x00001132       0xb5 build/startScreen.o
+ .debug_line    0x000011e7       0x8d build/drawMushroom.o
+ .debug_line    0x00001274       0x85 build/controller.o
+ .debug_line    0x000012f9       0x82 build/introControl.o
+ .debug_line    0x0000137b      0x196 build/dropANDpipecollisions.o
+ .debug_line    0x00001511       0x63 build/levelFinal.o
+ .debug_line    0x00001574       0x68 build/mushroomSelector.o
+ .debug_line    0x000015dc       0xae build/levelThree.o
+ .debug_line    0x0000168a      0x130 build/monster.o
+ .debug_line    0x000017ba       0xb5 build/levelOne.o
+
+.debug_info     0x00000000      0x8cd
+ .debug_info    0x00000000       0x6a build/blockcollisions.o
+ .debug_info    0x0000006a       0x77 build/main.o
+ .debug_info    0x000000e1       0x65 build/winANDlose.o
+ .debug_info    0x00000146       0x64 build/drawMario.o
+ .debug_info    0x000001aa       0x62 build/numbers.o
+ .debug_info    0x0000020c       0x66 build/pauseScreen.o
+ .debug_info    0x00000272       0x5f build/jtag.o
+ .debug_info    0x000002d1       0x66 build/framebuffer.o
+ .debug_info    0x00000337       0x5f build/Coin.o
+ .debug_info    0x00000396       0x63 build/levelTwo.o
+ .debug_info    0x000003f9       0x60 build/interrupt.o
+ .debug_info    0x00000459       0x71 build/pauseControlANDrestart.o
+ .debug_info    0x000004ca       0x66 build/startScreen.o
+ .debug_info    0x00000530       0x67 build/drawMushroom.o
+ .debug_info    0x00000597       0x65 build/controller.o
+ .debug_info    0x000005fc       0x67 build/introControl.o
+ .debug_info    0x00000663       0x70 build/dropANDpipecollisions.o
+ .debug_info    0x000006d3       0x65 build/levelFinal.o
+ .debug_info    0x00000738       0x6b build/mushroomSelector.o
+ .debug_info    0x000007a3       0x65 build/levelThree.o
+ .debug_info    0x00000808       0x62 build/monster.o
+ .debug_info    0x0000086a       0x63 build/levelOne.o
+
+.debug_abbrev   0x00000000      0x1b4
+ .debug_abbrev  0x00000000       0x14 build/blockcollisions.o
+ .debug_abbrev  0x00000014       0x12 build/main.o
+ .debug_abbrev  0x00000026       0x14 build/winANDlose.o
+ .debug_abbrev  0x0000003a       0x14 build/drawMario.o
+ .debug_abbrev  0x0000004e       0x14 build/numbers.o
+ .debug_abbrev  0x00000062       0x14 build/pauseScreen.o
+ .debug_abbrev  0x00000076       0x14 build/jtag.o
+ .debug_abbrev  0x0000008a       0x14 build/framebuffer.o
+ .debug_abbrev  0x0000009e       0x14 build/Coin.o
+ .debug_abbrev  0x000000b2       0x14 build/levelTwo.o
+ .debug_abbrev  0x000000c6       0x12 build/interrupt.o
+ .debug_abbrev  0x000000d8       0x14 build/pauseControlANDrestart.o
+ .debug_abbrev  0x000000ec       0x14 build/startScreen.o
+ .debug_abbrev  0x00000100       0x14 build/drawMushroom.o
+ .debug_abbrev  0x00000114       0x14 build/controller.o
+ .debug_abbrev  0x00000128       0x14 build/introControl.o
+ .debug_abbrev  0x0000013c       0x14 build/dropANDpipecollisions.o
+ .debug_abbrev  0x00000150       0x14 build/levelFinal.o
+ .debug_abbrev  0x00000164       0x14 build/mushroomSelector.o
+ .debug_abbrev  0x00000178       0x14 build/levelThree.o
+ .debug_abbrev  0x0000018c       0x14 build/monster.o
+ .debug_abbrev  0x000001a0       0x14 build/levelOne.o
+
+.debug_aranges  0x00000000      0x2d0
+ .debug_aranges
+                0x00000000       0x20 build/blockcollisions.o
+ .debug_aranges
+                0x00000020       0x28 build/main.o
+ .debug_aranges
+                0x00000048       0x20 build/winANDlose.o
+ .debug_aranges
+                0x00000068       0x20 build/drawMario.o
+ .debug_aranges
+                0x00000088       0x20 build/numbers.o
+ .debug_aranges
+                0x000000a8       0x20 build/pauseScreen.o
+ .debug_aranges
+                0x000000c8       0x20 build/jtag.o
+ .debug_aranges
+                0x000000e8       0x20 build/framebuffer.o
+ .debug_aranges
+                0x00000108       0x20 build/Coin.o
+ .debug_aranges
+                0x00000128       0x20 build/levelTwo.o
+ .debug_aranges
+                0x00000148       0x28 build/interrupt.o
+ .debug_aranges
+                0x00000170       0x20 build/pauseControlANDrestart.o
+ .debug_aranges
+                0x00000190       0x20 build/startScreen.o
+ .debug_aranges
+                0x000001b0       0x20 build/drawMushroom.o
+ .debug_aranges
+                0x000001d0       0x20 build/controller.o
+ .debug_aranges
+                0x000001f0       0x20 build/introControl.o
+ .debug_aranges
+                0x00000210       0x20 build/dropANDpipecollisions.o
+ .debug_aranges
+                0x00000230       0x20 build/levelFinal.o
+ .debug_aranges
+                0x00000250       0x20 build/mushroomSelector.o
+ .debug_aranges
+                0x00000270       0x20 build/levelThree.o
+ .debug_aranges
+                0x00000290       0x20 build/monster.o
+ .debug_aranges
+                0x000002b0       0x20 build/levelOne.o
+
+.debug_ranges   0x00000000       0x40
+ .debug_ranges  0x00000000       0x20 build/main.o
+ .debug_ranges  0x00000020       0x20 build/interrupt.o
