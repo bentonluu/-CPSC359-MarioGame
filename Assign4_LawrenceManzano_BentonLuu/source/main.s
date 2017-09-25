@@ -12,8 +12,8 @@ _start:
 main:
         bl      InstallIntTable                 //Install the interrupt table to be used when an interrupt occurs.
 
-	      bl	    EnableJTAG                      //Enables JTAG to be used.
-	      bl	    InitFrameBuffer                 //Initializes the frame buffer to draw on screen.
+	bl	EnableJTAG                      //Enables JTAG to be used.
+	bl	InitFrameBuffer                 //Initializes the frame buffer to draw on screen.
 
         mov     r0, #9                          //Move immediate value 9 (LATCH GPIO pin number) into argument register r0
         mov     r1, #1                          //Move immediate value 1 (output) into argument register r1
