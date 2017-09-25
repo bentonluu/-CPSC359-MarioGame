@@ -5,8 +5,8 @@
 /_______  /____/|   __/ \___  >__|    \____|__  (____  /__|  |__|\____/   |______  / |__|   \____/____  >
         \/      |__|        \/                \/     \/                          \/                   \/ 
 
-Created by: Benton Luu 10175103
-            Lawrence Manzano 10170563
+Created by: Benton Luu 
+            Lawrence Manzano 
 
 
 Controls:
